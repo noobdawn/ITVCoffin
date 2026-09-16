@@ -16,7 +16,9 @@ Usage:
 The game directory is the folder that contains ``IntoTheVoid_Data`` (or pass the CacheFiles
 folder directly). If ``--game`` is omitted, the ``ITV_GAME_DIR`` environment variable is used.
 
-Requires: Python 3.9+, UnityPy (requirements.txt), .NET 9 SDK (to run the patcher).
+Requires: Python 3.9+, UnityPy (requirements.txt).
+The release package bundles a self-contained patcher (patcher/publish/ITVCoffin.Patcher.exe) — no
+.NET install needed. When running from source, a .NET 9 SDK is required to build/run the patcher.
 """
 
 import argparse
@@ -65,6 +67,13 @@ def run_patcher(patcher_arg, in_dll, out_dll):
         else:
             cmds.append([patcher_arg, in_dll, out_dll])
     else:
+        # Release package: prefer the bundled self-contained patcher (no .NET needed).
+        for cand in (
+            os.path.join(ROOT, "patcher", "publish", "ITVCoffin.Patcher.exe"),
+            os.path.join(ROOT, "patcher", "publish", "ITVCoffin.Patcher.dll"),
+        ):
+            if os.path.isfile(cand):
+                cmds.append((["dotnet", cand] if cand.endswith(".dll") else [cand]) + [in_dll, out_dll])
         for cfg in ("Release", "Debug"):
             dll = os.path.join(ROOT, "patcher", "bin", cfg, "net9.0", "ITVCoffin.Patcher.dll")
             if os.path.isfile(dll):

@@ -51,10 +51,18 @@ ITVCoffin/
 | 组件 | 版本 | 说明 |
 |---|---|---|
 | Windows | 10/11 x64 | 脚本与补丁器面向 Windows |
-| .NET SDK | **9.0** | 编译/运行 proxy 与 patcher |
+| .NET SDK | **9.0**（可选） | 仅**从源码构建**时需要；发布版压缩包已内置自包含 exe，无需安装 .NET |
 | Python | **3.9+** | 运行 scripts/ |
 | UnityPy | `pip install -r requirements.txt` | 读写 Unity AssetBundle |
 | 游戏客户端 | 官方 CN 版 | 已安装并能正常启动 |
+
+> **发布版（Release 压缩包）**：已包含 `proxy\publish\ITVCoffin.Proxy.exe` 与
+> `patcher\publish\ITVCoffin.Patcher.exe`（Windows x64 自包含，无需安装 .NET）。
+> `run_capture.bat` 与 `patch_client.py` 会自动优先使用它们——你只需要安装 Python 依赖：
+>
+> ```bat
+> pip install -r requirements.txt
+> ```
 
 首次使用前，先安装依赖：
 
@@ -186,6 +194,7 @@ REM 2) 从 bundle 里取出 Assembly-CSharp.dll（work\Assembly-CSharp.dll）
 
 REM 3) 打补丁
 dotnet patcher\bin\Release\net9.0\ITVCoffin.Patcher.dll work\Assembly-CSharp.dll work\Assembly-CSharp.patched.dll
+REM    发布版：patcher\publish\ITVCoffin.Patcher.exe work\Assembly-CSharp.dll work\Assembly-CSharp.patched.dll
 REM    也可用：dotnet run --project patcher\ITVCoffin.Patcher.csproj -c Release -- work\Assembly-CSharp.dll work\Assembly-CSharp.patched.dll
 
 REM 4) 重打包
