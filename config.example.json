@@ -1,0 +1,9 @@
+{
+  "tcpPort": 25313,
+  "httpPort": 18080,
+  "officialTcpHost": "1.13.127.58",
+  "officialTcpPort": 30531,
+  "httpHost": "cweb.jinzhangshu.com",
+  "officialHost": "official.jinzhangshu.com",
+  "captureDir": "captures"
+}

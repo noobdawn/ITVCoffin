@@ -1,0 +1,3 @@
+# Python dependencies for the ITVCoffin scripts.
+# UnityPy is used to read/repack the game's Unity AssetBundles.
+UnityPy>=1.10

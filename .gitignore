@@ -1,0 +1,35 @@
+# ---- .NET build output ----
+bin/
+obj/
+publish/
+
+# ---- proxy runtime output ----
+captures/
+logs/
+*.log
+
+# ---- python scripts working files ----
+work/
+extracted/
+parsed/
+__pycache__/
+*.pyc
+
+# ---- patched / backup artifacts ----
+*.bak
+*.patched.dll
+hotupdate_*.bundle
+
+# ---- local config (keep config.example.json) ----
+config.json
+
+# ---- virtualenvs ----
+.venv/
+venv/
+
+# ---- editor / OS noise ----
+.vs/
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
